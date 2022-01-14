@@ -14,7 +14,7 @@ var minimoExistencia = 1.5 * 14 * IAS;
 // https://dre.pt/home/-/dre/117503933/details/maximized
 // https://dre.pt/home/-/dre/126365738/details/maximized
 // https://files.dre.pt/1s/2021/12/23601/0000500009.pdf
-var salarioMinimo = ano===2019 ? 600 * 14 : (ano===2019 ? 635 * 14 : 705 * 14);
+var salarioMinimo = ano===2019 ? 600 * 14 : (ano===2020 ? 635 * 14 : 705 * 14);
 
 // Valor mínimo de Deduçōes Específicas
 // Página 8: https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/Folhetos_informativos/Documents/IRS_folheto_2019.pdf
@@ -142,7 +142,7 @@ function calcularDeducoesColeta(rendimentoColectavel, quoeficienteFamiliar, asce
 
   var deducoesDependentesAscendentes = dependentes3Menos*valorDependente3Menos +
                                        dependentes3Mais*valorDependente3Mais +
-                                       (ano===2020 ? Math.max(0, dependentes3Menos-1)*valorDependente3MenosExtra : 0) +
+                                       (ano>=2020 ? Math.max(0, dependentes3Menos-1)*valorDependente3MenosExtra : 0) +
                                        ascendentes*valorAscendente;
   if ((estadoCivil==='Casado/Unido de facto') && tributacaoSeparado) {
     deducoesDependentesAscendentes = deducoesDependentesAscendentes / 2;
@@ -342,6 +342,11 @@ function calcularIRS(rendimentoAnualBrutoA, rendimentoAnualBrutoB, estadoCivil, 
     // https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs69.aspx
     var quoeficienteFamiliar = (tributacao==='Conjunto') && (estadoCivil==='Casado/Unido de facto') ? 2 : 1;
 
+    // garantir quoeficiente correcto
+    if (rendimentoAnualBrutoB===0) {
+      quoeficienteFamiliar = 1;
+    }
+
     // Ponto 1 do https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs69.aspx
     var rendimentoColectavelFinal = (rendimentoColectavelA + rendimentoColectavelB) / quoeficienteFamiliar;
 
@@ -420,10 +425,14 @@ function calcularIRS_IL(rendimentoAnualBrutoA, rendimentoAnualBrutoB, estadoCivi
 
   // a isenção é para cada sujeito passivo
   var sujeitosPassivos = rendimentoAnualBrutoB > 0 ? 2 : 1;
+  if (estadoCivil==='Casado/Unido de facto') {
+    // garantir que são 2 sujeitos passivos, mesmo quando o rendimento do suj passivo B é 0
+    sujeitosPassivos = 2;
+  }
 
   var valorIsencao = thresholdIRS * sujeitosPassivos;
   var isencaoMensalILExtra = rendimentoAnualBrutoB > 0 ? 200 : 400;
-  valorIsencao += isencaoMensalILExtra * (dependentes + ascendentes) * 14 * sujeitosPassivos;
+  valorIsencao += isencaoMensalILExtra * dependentes * 14 * sujeitosPassivos;
 
   var rendColetavel = rendimentoAnualBrutoA + rendimentoAnualBrutoB - valorIsencao;
 
