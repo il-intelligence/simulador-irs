@@ -1,0 +1,99 @@
+.container {
+  max-width: 980px;
+}
+
+.lh-condensed { line-height: 1.25; }
+
+.il-color {
+    color: #00adef!important;
+}
+
+.list-group-item h6 span {
+  border: solid #222;
+  border-width: 0 1px 1px 0;
+  cursor: pointer;
+  padding: 3px;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.list-group-item h6.collapsed span {
+  transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+  transition: .3s transform ease-in-out;
+}
+
+.list-group-item h6 span {
+  transform: rotate(-140deg);
+  -webkit-transform: rotate(-140deg);
+  transition: .3s transform ease-in-out;
+}
+
+.card-body {
+  border: 0px;
+}
+
+.bg-il {
+  background-color: #00aeef!important;
+}
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('webfont.eot'); /* IE9 Compat Modes */
+  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+#tabelaRendimentos {
+  font-family: 'MyWebFont', Fallback, sans-serif;
+}
+
+#tabelaRendimentos tr:first-child th:first-child, #tabelaRendimentos td:first-child {
+  position:sticky;
+  left:0px;
+  background-color:#f8f9fa!important;
+}
+
+#tableEscalaoIRS {
+  margin-bottom: 1rem;
+}
+
+#tableEscalaoIRS tr th {
+  vertical-align: middle!important;
+  text-align: center!important;
+}
+
+div.row h2 {
+  text-align: center!important;
+}
+
+.my-text-left {
+  text-align: left!important;
+}
+
+.lead, .blockquote {
+  font-size: calc(1rem + .3vw);
+  font-weight: 300;
+}
+@media (min-width: 1200px){
+  .lead, .blockquote {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+}
+
+.btn-primary {
+  background-color: #005289;
+  border-color: #005289;
+}
+
+.btnVideosHover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}

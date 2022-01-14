@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="pt-pt">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="irs.css" rel="stylesheet">
+    <link rel="icon" href="https://iniciativaliberal.pt/wp-content/uploads/2017/06/favicon.png">
+
+    <title>Cálculo IRS | Iniciativa Liberal</title>
+  </head>
+
+  <body class="bg-light">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-il">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Iniciativa Liberal</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+          <ul class="nav navbar-nav me-auto mb-2 mb-md-0" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="nav-simulador-tab" data-bs-toggle="tab" data-bs-target="#nav-simulador" type="button" role="tab" aria-controls="nav-simulador" aria-selected="true">Simulador</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="nav-irs-tab" data-bs-toggle="tab" data-bs-target="#nav-irs" type="button" role="tab" aria-controls="nav-irs" aria-selected="false">IRS</a>
+            </li>
+            <!--
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="nav-videos-tab" data-bs-toggle="tab" data-bs-target="#nav-videos" type="button" role="tab" aria-controls="nav-videos" aria-selected="false">Vídeos</a>
+            </li>
+            -->
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="nav-disclaimer-tab" data-bs-toggle="tab" data-bs-target="#nav-disclaimer" type="button" role="tab" aria-controls="nav-disclaimer" aria-selected="false">Disclaimer</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="nav-simulador" role="tabpanel" aria-labelledby="nav-simulador-tab">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-12 py-5 text-center">
+              <h2 class="pt-5">Simulador de IRS</h2>
+              <p class="lead">Simulador para os rendimentos obtidos no ano de 2021 (a serem declarados em 2022 de acordo com a informação do <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/codigo-do-irs-indice.aspx">CIRS</a> em Jan. 2022). Tem como objectivo comparar o actual sistema com o apresentado no programa da Iniciativa Liberal. Neste simulador verá também a percentagem do seu rendimento anual que vai para o Estado.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <form class="needs-validation" novalidate="" id="formIRS">
+                <!--
+                <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <label for="anoCivil">Ano Civil</label>
+                    <select class="form-select d-block w-100" id="anoCivil">
+                      <option selected>2019</option>
+                      <option>2020</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Por favor escolha um ano civil válido.
+                    </div>
+                  </div>
+                </div>
+                -->
+
+                <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <h5>&nbsp;</h5>
+                    <label for="estadoCivil">Estado Civil</label>
+                    <select class="form-select d-block w-100" id="estadoCivil">
+                      <option>Casado/Unido de facto</option>
+                      <option selected>Solteiro, divorciado, viúvo ou separado judicialmente</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Por favor escolha um estado civil válido.
+                    </div>
+                  </div>
+                  <div class="col-md-2 mb-3">
+                    <h5>&nbsp;</h5>
+                    <label for="tributacao">Tributação</label>
+                    <select class="form-select d-block w-100" id="tributacao" disabled>
+                      <option>Separado</option>
+                      <option selected>Conjunto</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <h5>Sujeito Passivo A</h5>
+                    <label for="rendA">Rendimento bruto anual (14 meses)</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">EUR</span>
+                      </div>
+                      <input type="number" min="0" class="form-control" id="rendA" placeholder="" value="" required="">
+                      <div class="invalid-feedback">
+                        Rendimento inválido.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <h5>Sujeito Passivo B</h5>
+                    <label for="rendB">Rendimento bruto anual (14 meses)</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">EUR</span>
+                      </div>
+                      <input type="number" min="0" class="form-control" id="rendB" placeholder="" value="" disabled required="">
+                      <div class="invalid-feedback">
+                        Rendimento inválido.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 mb-3">
+                    <h5>Ascendentes</h5>
+                    <label for="ascendentes">Número de ascendentes</label>
+                    <input type="number" min="0" class="form-control" id="ascendentes" placeholder="" value="0" title="Terá que viver em comunhão de habitação com o sujeito passivo e não poderá auferir rendimento superior à pensão mínima do regime geral.">
+                    <div class="invalid-feedback">
+                      Número de ascendentes inválido.
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <h5>Dependentes</h5>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="dependentes3menos">Com menos 3 anos</label>
+                        <input type="number" min="0" class="form-control" id="dependentes3menos" placeholder="" value="0">
+                        <div class="invalid-feedback">
+                          Número de dependentes inválido.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="dependentes3mais">Com 3 ou mais anos</label>
+                        <input type="number" min="0" class="form-control" id="dependentes3mais" placeholder="" value="0">
+                        <div class="invalid-feedback">
+                          Número de dependentes inválido.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="mb-4">
+
+                <div class="row accordion accordion-flush" id="deducoesColetaInput">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#deducoesColeta-collapse" aria-expanded="false">
+                        <div class="d-flex align-middle">
+                          <h5 title="">Despesas passiveis de deduçōes</h5>
+                          <p><small>(Podem ser consultadas no <a href="https://faturas.portaldasfinancas.gov.pt/home.action">e-fatura</a>)</small></p>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="deducoesColeta-collapse" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#deducoesColetaInput">
+                      <div class="accordion-body">
+                        <div class="row">
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasGerais">Despesas gerais familiares</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasGerais" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasSaude">Despesas de saúde</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasSaude" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasEducacao">Despesas de educação</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasEducacao" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasHabitacao">Despesas de habitação</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasHabitacao" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasLares">Despesas com lares</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasLares" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasPensoesAlimentos">Despesas com pensōes de alimentos</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasPensoesAlimentos" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasAutomoveis">Reparação de automóveis</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasAutomoveis" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasMotociclos">Reparação de motociclos</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasMotociclos" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasRestauracao">Restauração e alojamento</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasRestauracao" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasCabeleireiros">Cabeleireiros</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasCabeleireiros" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasVeterinario">Atividades veterinárias</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasVeterinario" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="despesasPasses">Passes Mensais</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">EUR</span>
+                              </div>
+                              <input type="number" min="0" class="form-control" id="despesasPasses" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                Valor inválido.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="mb-4">
+                <div class="row justify-content-center">
+                  <div class="col text-center mb-2">
+                    <button class="btn btn-primary btn-lg btn-block mx-2" type="submit" value="1">Flat tax</button>
+                    <button class="btn btn-primary btn-lg btn-block mx-2" type="submit" value="2">2 escalōes</button>
+                  </div>
+                </div>
+                <hr class="mb-4">
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="py-2 px-3 text-center col-md-12">
+              <p class="blockquote" id="summary">Solteiro | sem dependentes | sem ascendentes</p>
+            </div>
+            <div class="col-md-6 mb-4 offset-md-3">
+              <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Rendimento</h6>
+                    <small class="text-muted">Bruto anual</small>
+                  </div>
+                  <span class="text-muted pr-4" id="rendimento"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0" data-toggle="tooltip" data-placement="top" title="Rendimento bruto retirando IRS e TSU">Rendimento Líquido Anual</h6>
+                    <small class="text-muted" data-toggle="tooltip" data-placement="top" title="IRS + TSU do trabalhador + TSU da empresa">Contribuiçōes Estado (sistema actual)</small>
+                  </div>
+                  <div class="text-muted pr-4">
+                    <div class="d-flex justify-content-end">
+                      <span id="valorTrabalhador"></span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <span id="valorEstado"></span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item justify-content-between lh-condensed">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h6 class="my-0 collapsed" data-bs-toggle="collapse" href="#detalheContasIRS" role="button" aria-expanded="false" aria-controls="detalheContasIRS">IRS<span></span></h6>
+                      <small class="text-muted">Sistema atual</small>
+                    </div>
+                    <span class="text-muted pr-4" id="irsAtual"></span>
+                  </div>
+                  <div class="collapse" id="detalheContasIRS">
+                    <div class="card card-body mt-2 px-0 py-0">
+                      <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Deduções Específicas</small>
+                          <small class="text-muted pr-3" id="deducoesEspecificas"></small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Rendimento Coletável</small>
+                          <small class="text-muted pr-3" id="rendimentoColectavel"></small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Taxa</small>
+                          <small class="text-muted pr-3" id="taxa"></small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Coleta Total</small>
+                          <small class="text-muted pr-3" id="coletaTotal"></small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Deduções à Coleta</small>
+                          <small class="text-muted pr-3" id="deducoesColeta"></small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                          <small class="my-0">Coleta Líquida</small>
+                          <small class="text-muted pr-3" id="coletaLiquida"></small>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Proposta IL</h6>
+                    <small class="text-muted" id="nomeProposta">Flat tax (15%)</small>
+                  </div>
+                  <span class="text-muted pr-4" id="irsIL"></span>
+                </li>
+                <!--
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0">Proposta IL</h6>
+                    <small class="text-muted">2 escalões (15%; 27.5%)</small>
+                  </div>
+                  <span class="text-muted pr-4" id="irsIL3e"></span>
+                </li>
+              -->
+              </ul>
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Poupança IRS</span>
+                <span class="badge badge-secondary badge-pill" id="diff"></span>
+              </h4>
+            </div>
+          </div>
+
+          <div class="row">
+            <hr class="mb-4">
+            <div class="col-md-12">
+              <form class="needs-validation" novalidate="" id="formAumento">
+                <div class="row text-center">
+                  
+                    <div class="col-md-6 mb-3">
+                      <button class="btn btn-primary btn-md btn-block" type="submit">Usando o sistema actual, se a empresa aumentasse o sujeito passivo A em:</button>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">EUR</span>
+                        </div>
+                        <input type="number" min="0" class="form-control" id="aumento" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                          Valor inválido ou falta rendimento sujeito passivo.
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              </form>
+            </div>
+            <div class="py-2 px-3 text-center col-md-12">
+              <p class="blockquote d-none" id="aumentoTexto"></p>
+            </div>
+            <hr class="mb-4">
+          </div>
+
+          <!--
+          <div class="row">
+            <div class="col-md-12">
+              <form class="needs-validation" novalidate="" id="formRend">
+                <hr class="mb-4">
+                <div class="row justify-content-center">
+                  <div class="col text-center mb-2">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Como varia o seu rendimento?</button>
+                  </div>
+                </div>
+                <hr class="mb-4">
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive-sm">
+                <table class="table table-hover" id="tabelaRendimentos">
+                </table>
+              </div>
+            </div>
+          </div>
+        -->
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="nav-irs" role="tabpanel" aria-labelledby="nav-irs-tab">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-12 pt-5">
+              <h2 class="pt-5">O que é o IRS?</h2>
+              <p class="lead">O IRS é a sigla para <span class="fw-bold">I</span>mposto sobre os <span class="fw-bold">R</span>endimentos de pessoas <span class="fw-bold">S</span>ingulares. Ou seja, sobre o imposto que é tributado sobre os rendimentos dos contribuintes.</p>
+              <p class="lead">Todos os cidadãos que trabalham são obrigados a entregar uma parte dos seus rendimentos. Este imposto incide sobre os <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs2.aspx" target="_blank">rendimentos que são atribuídos diretamente aos cidadãos</a>, sejam residentes em Portugal ou não (os chamados não residentes) que auferem rendimentos em território nacional.</p>
+              <p class="lead">O cálculo do IRS é feito mediante a situação económica dos contribuintes e do respectivo agregado familiar (estado civil, número de descendente/ascendentes, património, grau de deficiência, entre outros).</p>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Como é calculado o IRS?</h2>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+
+              <nav class="navbar navbar-expand-md">
+                <ul class="nav nav-pills mx-auto mb-3" role="tablist">
+                  <li class="nav-item text-center" role="presentation">
+                    <a class="nav-link active" id="pill-irs-il" data-bs-toggle="pill" href="#irs-il" role="tab" aria-controls="irs-il" aria-selected="false">Flat Tax</a>
+                  </li>
+                  <li class="nav-item text-center" role="presentation">
+                    <a class="nav-link" id="pill-irs-actual" data-bs-toggle="pill" href="#irs-actual" role="tab" aria-controls="irs-actual" aria-selected="true">Sistema Actual</a>
+                  </li>
+                </ul>
+              </nav>
+
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="irs-il" role="tabpanel" aria-labelledby="pill-irs-il">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12 accordion" id="accordionIRSIL">
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsILHeading1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsILCollapse1" aria-expanded="false" aria-controls="irsILCollapse1">
+                              <span class="fw-bold">1º passo: Calcular o rendimento anual bruto do agregado familiar</span>
+                            </button>
+                          </h2>
+                          <div id="irsILCollapse1" class="accordion-collapse collapse" aria-labelledby="irsILHeading1" data-bs-parent="#accordionIRSIL">
+                            <div class="accordion-body">
+                              <p class="lead">Para determinar o rendimento anual bruto do agregado familiar é necessário somar todos os rendimentos mensais brutos (incluindo o subsídio de férias e natal) de todos os elementos do agregado. Se algum dos membros do agregado apenas tiver rendimentos em parte do ano deve incluir todo esse valor. Neste simulador deve incluir os rendimentos de ascendentes, mas não de descendentes.</p>
+                              <p class="lead">Considere-se, por exemplo, um rendimento mensal de 850€. Esse totaliza um rendimento anual bruto de 11 900€.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsILHeading2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsILCollapse2" aria-expanded="false" aria-controls="irsILCollapse2">
+                              <span class="fw-bold">2º passo: Calcular o valor de isenção</span>
+                            </button>
+                          </h2>
+                          <div id="irsILCollapse2" class="accordion-collapse collapse" aria-labelledby="irsILHeading2" data-bs-parent="#accordionIRSIL">
+                            <div class="accordion-body">
+                              <p class="lead">Segundo a <a href="https://iniciativaliberal.pt/wp-content/uploads/2022/01/Iniciativa-Liberal-Programa-Eleitoral-2022.pdf" target="_blank">proposta da Iniciativa Liberal</a> os primeiros 705€ ficam isentos de tributação. Ou seja, dos 850€ de rendimento mensal apenas 145€ são alvo de tributação.</p>
+                              <p class="lead">Adicionalmente, por cada descendente ou ascendente o valor de isenção sobe em 200€ e se o aggregado familiar for uma família monoparental o limite sobe em 400€ por cada descendente.</p>
+                              <p class="lead">Como no nosso exemplo existe apenas um sujeito passivo e um descendente, o valor de isenção é de 1 050€, ou seja, só serão tributados rendimentos brutos mensais acima deste valor.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsILHeading3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsILCollapse3" aria-expanded="false" aria-controls="irsILCollapse3">
+                              <span class="fw-bold">3º passo: Calcular a coleta líquida</span>
+                            </button>
+                          </h2>
+                          <div id="irsILCollapse3" class="accordion-collapse collapse" aria-labelledby="irsILHeading3" data-bs-parent="#accordionIRSIL">
+                            <div class="accordion-body collapsed">
+                              <p class="lead">Pela proposta da Iniciativa Liberal, os rendimentos acima do limite identificado no ponto anterior são tributados a uma taxa única de 15%. No exemplo que demos o rendimento bruto mensal é inferior ao valor de isenção, portanto esse aggregado familiar terá uma coleta líquida de 0€.</p>
+                              <p class="lead">Se o rendimento mensal bruto do exemplo fosse de 1 500€, o valor da coleta líquida seria de (1 500€ - 1 050€) x 14 x 15% = 945€.</p>
+                              <p class="lead">Se o rendimento fosse mais elevado, superior a 30 000€ ano, o valor acima dos 30 000€, e apenas esse, pagaria uma taxa de 28%..</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsILHeading4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsILCollapse4" aria-expanded="false" aria-controls="irsILCollapse4">
+                              <span class="fw-bold">4º passo: Tenho IRS a pagar?</span>
+                            </button>
+                          </h2>
+                          <div id="irsILCollapse4" class="accordion-collapse collapse" aria-labelledby="irsILHeading3" data-bs-parent="#accordionIRSIL">
+                            <div class="accordion-body">
+                              <p class="lead">Todos os meses tem de pagar retenção na fonte. Se a soma do que pagou ao longo do ano em retenção na fonte for superior à coleta líquida calculado no ponto anterior tem direito a uma devolução por parte do Estado, caso contrário tem de pagar a diferença.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="irs-actual" role="tabpanel" aria-labelledby="pill-irs-actual">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12 accordion" id="accordionIRS">
+                        <p class="small"><span class="fw-bold">Nota:</span> apesar das contas já terem algum nível de complexidade, apresentamos abaixo uma simplificação.</p>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse1" aria-expanded="false" aria-controls="irsCollapse1">
+                              <span class="fw-bold">1º passo: Calcular o rendimento anual bruto do agregado familiar</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse1" class="accordion-collapse collapse" aria-labelledby="irsHeading1" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">Para determinar o rendimento anual bruto do agregado familiar é necessário sumar todos os rendimentos mensais brutos (incluíndo o subsídio de férias e natal) de todos os elementos do agregado. Se algum dos membros do agregado apenas tiver rendimentos em parte do ano deve incluir todo esse valor. Neste simulador deve incluir os rendimentos de ascendentes, mas não de descendentes.</p>
+                              <p class="lead">Considere-se, por exemplo, um rendimento mensal de 850€. Esse totaliza um rendimento anual bruto de 11 900€.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse2" aria-expanded="false" aria-controls="irsCollapse2">
+                              <span class="fw-bold">2º passo: Calcular o rendimento coletável</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse2" class="accordion-collapse collapse" aria-labelledby="irsHeading2" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">Ao rendimento anual bruto do agregado são <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/Folhetos_informativos/Documents/IRS_folheto_2019.pdf" target="_blank">retiradas as deduções específicas</a>. Ou seja, pra cada sujeito passivo é considerado o maior de: 1) 4 104€ e 2) contribuição da Segurança Social. Por exemplo, no caso de um casal o valor abatido é de, pelo menos, 8 208€.</p>
+                              <p class="lead">Dessa forma o rendimento coletável do nosso exemplo é de 7 796€ (11 900€ - 4 104€).</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse3" aria-expanded="false" aria-controls="irsCollapse3">
+                              <span class="fw-bold">3º passo: Identificar o quoeficiente familiar</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse3" class="accordion-collapse collapse" aria-labelledby="irsHeading3" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">No caso de um <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs69.aspx" target="_blank">casal que opte pela tributação conjunta</a> é 2, ou seja, é necessário dividir o rendimento coletável por 2. Nas restantes situações o quoeficiente é de 1. A existência de descendentes não afecta o quoeficiente familiar.</p>
+                              <p class="lead">Assim sendo, como no nosso exemplo o agregado familiar é composto por apenas 1 sujeito passivo o valor do rendimento coletável é o mesmo: 7 796€.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse4" aria-expanded="false" aria-controls="irsCollapse4">
+                              <span class="fw-bold">4º passo: Identificar o escalão e a taxa de IRS</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse4" class="accordion-collapse collapse" aria-labelledby="irsHeading4" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">Para identificar o escalão de IRS basta verificar na <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs68.aspx" target="_blank">tabela de taxas gerais</a>, sem nunca esquecer as <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs68a.aspx" target="_blank">taxas adicionais de solidariedade</a>, a que intervalo corresponte o rendimento coletável.<p>
+
+                              <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                  <div class="table-responsive-sm">
+                                    <table class="table table-hover table-sm" id="tableEscalaoIRS">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col" class="text-center align-middle">Escalão</th>
+                                          <th scope="col" class="text-center align-middle">Rendimento coletável</th>
+                                          <th scope="col" class="text-center align-middle">Taxa</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <th>1º</th>
+                                          <td>Até 7 112€</td>
+                                          <td>14.5%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>2º</th>
+                                          <td>De mais de 7 112€ até 10 732€</td>
+                                          <td>23.0%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>3º</th>
+                                          <td>De mais de 10 732€ até 20 322€</td>
+                                          <td>28.5%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>4º</th>
+                                          <td> De mais de 20 322€ até 25 075€</td>
+                                          <td>35.0%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>5º</th>
+                                          <td>De mais de 25 075€ até 36 967€</td>
+                                          <td>37.0%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>6º</th>
+                                          <td>De mais de 36 967€ até 80 000€</td>
+                                          <td>45.0%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>7º</th>
+                                          <td>De mais de 80 000€ até 80 882€</td>
+                                          <td>47.5%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>8º</th>
+                                          <td>De mais de 80 882€ até 250 000€</td>
+                                          <td>50.5%</td>
+                                        </tr>
+                                        <tr>
+                                          <th>9º</th>
+                                          <td>Superior a 250 000€</td>
+                                          <td>53.0%</td>
+                                        </tr>
+
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <p class="lead">O rendimento coletável de 7 796€ enquadra-se no 2º escalão, ao qual corresponde uma taxa de 23%.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse5" aria-expanded="false" aria-controls="irsCollapse5">
+                              <span class="fw-bold">5º passo: Calcular a coleta total</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse5" class="accordion-collapse collapse" aria-labelledby="irsHeading5" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">Uma das formas de calcular a coleta total é multiplicar o rendimento coletável que coube em cada intervalo pela taxa correspondente.</p>
+                              <p class="lead">Portanto, no nosso exemplo as contas seriam: 1) 7 112€ x 14.5% e 2) 684€ (7 796€ - 7 112€) x 23%. Fazendo uma coleta total de 1 189€. Este valor é, por fim, <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs69.aspx" target="_blank">multiplicado pelo quoeficiente familiar</a>, neste caso o quoefience é de 1.</p>
+                              <p class="lead">Se o rendimento bruto anual menos a <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs70.aspx" target="_blank">coleta total for inferior ao mínimo de existência ou inferior ao salário mínimo</a> então não há existência de pagamentos em sede de IRS.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse6" aria-expanded="false" aria-controls="irsCollapse6">
+                              <span class="fw-bold">6º passo: Calcular as deduções à coleta</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse6" class="accordion-collapse collapse" aria-labelledby="irsHeading6" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">À coleta total é depois <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78.aspx" target="_blank">removido as deduções à coleta</a>. Essas deduções têm como base as faturas declarados no ano civil ao que o IRS diz respeito e são as seguintes:</p>
+                              <ul>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78a.aspx" target="_blank">Deduções dos descendentes e ascendentes</a>: 726€ por cada dependente com menos de 3 anos de idade, 600€ por cada dependente com mais de 3 anos de idade, e 525€ por cada ascendente. Em famílias monopareintais o valor por ascendente é de 635€. Existe também um extra por cada dependente após o 1º filho;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78b.aspx" target="_blank">Dedução das despesas gerais familiares</a>: 35% das despesas que não entram nas restantes categorias até um máximo de 250€ por cada sujeito passivo. No caso de famílias monoparentais a dedução é de 45% até o limite de 335€;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78c.aspx" target="_blank">Dedução de despesas de saúde</a>: 15% até um limite de 1 000€;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78d.aspx" target="_blank">Dedução de despesas de formação e educação</a>: 30% até um limite de 800€;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78e.aspx" target="_blank">Dedução de encargos com imóveis</a>: 15% até um máximo que varia em função do rendimento coletável;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78f.aspx" target="_blank">Dedução pela exigência de fatura</a>: valor do IVA de despesas com automóveis, motociclos, restauração, cabeleireiros e veterinários;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs83a.aspx" target="_blank">Dedução respeitantes a pensões de alimentos</a>: 20% do valor pago sem limite;</li>
+                                <li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs84.aspx" target="_blank">Dedução com encargos com lares</a>: 25% até um limite de 403.75€;</li>
+                              </ul>
+                              <p class="lead">Tirando as deduções dos descendentes e ascendentes e das despesas gerais familiares existe um <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs78.aspx" target="_blank"> máximo de dedução</a> que varia em função do rendimento coletável. No exemplo considerado é de 2 486€.</p>
+                              <p class="lead">No exemplo que temos considerado, assumindo 87.5€ de dedução das despesas gerais familiares, 150€ de dedução de despesas de saúde, 240€ de dedução de despesas de formação e educação, e 600€ de eduções dos descendentes e ascendentes temos uma dedução à coleta de 1 078€.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading7">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse7" aria-expanded="false" aria-controls="irsCollapse7">
+                              <span class="fw-bold">7º passo: Calcular a coleta líquida</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse7" class="accordion-collapse collapse" aria-labelledby="irsHeading7" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <h5 class="fw-bold"></h5>
+                              <p class="lead">A coleta líquida é a coleta total (ponto 5) menos as deduções à coleta (ponto 6).</p>
+                              <p class="lead">No exemplo que temos considerado, o valor de IRS será de 1 189€ - 1 078€ = 111€.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="irsHeading8">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#irsCollapse8" aria-expanded="false" aria-controls="irsCollapse8">
+                              <span class="fw-bold">8º passo: Tenho IRS a pagar?</span>
+                            </button>
+                          </h2>
+                          <div id="irsCollapse8" class="accordion-collapse collapse" aria-labelledby="irsHeading7" data-bs-parent="#accordionIRS">
+                            <div class="accordion-body">
+                              <p class="lead">Todos os meses tem de pagar retenção na fonte. Se a soma do que pagou ao longo do ano em retenção na fonte for superior à coleta líquida calculado no ponto anterior tem direito a uma devolução por parte do Estado, caso contrário tem de pagar a diferença.</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--
+      <div class="tab-pane fade" id="nav-videos" role="tabpanel" aria-labelledby="nav-videos-tab">
+        <div class="container">
+
+          <div class="row justify-content-center">
+            <div class="col-md-8 pt-5">
+              <h2 class="pt-5 pb-3">Episódios Simulador IRS</h2>
+
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe id="video" class="embed-responsive-item" width="100%" height="315" src="https://www.youtube.com/embed/up0Gfd5c0cM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-center pt-3">
+            <div class="col-md-8 text-center">
+
+              <p class="lead" id="descVideo">Video 1</p>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-center pt-3">
+            <div class="col-md-8 text-center">
+
+              <button onclick="changeVideo(this,1)" type="button" class="btn btn-outline-secondary mx-2 mb-2 btnVideos btnVideosHover">Ep. 1</button>
+              <button onclick="changeVideo(this,2)" type="button" class="btn btn-outline-secondary mx-2 mb-2 btnVideos">Ep. 2</button>
+              <button onclick="changeVideo(this,3)" type="button" class="btn btn-outline-secondary mx-2 mb-2 btnVideos">Ep. 3</button>
+              <button onclick="changeVideo(this,4)" type="button" class="btn btn-outline-secondary mx-2 mb-2 btnVideos">Ep. 4</button>
+              <button onclick="changeVideo(this,5)" type="button" class="btn btn-outline-secondary mx-2 mb-2 btnVideos">Ep. 5</button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    -->
+
+      <div class="tab-pane fade" id="nav-disclaimer" role="tabpanel" aria-labelledby="nav-disclaimer-tab">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-12 pt-5">
+              <h2 class="pt-5">Proteção dos dados</h2>
+              <p class="lead">Nenhuma informação inserida neste site é guardada ou enviada para a Iniciativa Liberal, nem para nenhum outro site.</p>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Verificação dos cálculos</h2>
+              <p class="lead">Todos os cálculos foram validados no <a href="https://irs.portaldasfinancas.gov.pt/home.action" target="_blank">Portal das Finanças</a> e/ou no <a href="https://www.pwc.pt/pt/servicos/fiscalidade/simulador-irs.html" target="_blank">simulador da PwC</a>, bem como por fiscalistas independentes.</p>
+              <p class="lead">Como os cálculos do sistema actual são complexos e para mostrar total transparência nos mesmos, o código fonte pode ser encontrado neste <a href="https://github.com/il-intelligence/simulador-irs" target="_blank">repositório</a>. São aceites propostas de alteração ou correção de erros.</p>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Pressupostos</h2>
+              <ul>
+                <li class="lead">Estamos a assumir que os trabalhadores se encontram no regime geral da TSU, ou seja, 11% de Segurança Social;</li>
+                <li class="lead">No caso de tributação separada assumimos que cada sujeito passivo terá 50% das deduções à coleta;</li>
+                <li class="lead">Na dedução à coleta do IVA assumimos que todos os artigos foram taxados a 23%.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Situações não contempladas neste simulador</h2>
+              <ul>
+                <li class="lead">Residentes fiscais nos Açores e na Madeira;</li>
+                <li class="lead">Sujeitos passivos deficientes;</li>
+                <li class="lead">Agregados familiares em que os descendentes ou os ascendentes aufiram rendimentos;</li>
+                <li class="lead">Deduções de PPRs;</li>
+                <li class="lead">Rendimentos das categorias B, E, F, G e H.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Fontes de informação usadas</h2>
+              <p class="lead">A principal fonte de dados foi o <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/codigo-do-irs-indice.aspx" target="_blank">código do imposto sobre o rendimento das pessoas singulares (CIRS)</a> para o sistema em vigor e a <a href="https://iniciativaliberal.pt/wp-content/uploads/2022/01/Iniciativa-Liberal-Programa-Eleitoral-2022.pdf" target="_blank">proposta de uma flat tax</a> da Iniciativa Liberal. Fontes adicionais:</p>
+              <ul>
+                <li class="lead">IAS: <a href="https://dre.pt/home/-/dre/117942337/details/maximized" target="_blank">2019</a>, <a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/legislacao/diplomas_legislativos/Documents/Portaria_27_2020.pdf" target="_blank">2020</a> e <a href="https://dre.pt/dre/detalhe/portaria/294-2021-175780035" target="_blank">2021</a>;</li>
+                <li class="lead">Salário mínimo: <a href="https://dre.pt/home/-/dre/117503933/details/maximized" target="_blank">2019</a>, <a href="https://dre.pt/home/-/dre/126365738/details/maximized" target="_blank">2020</a> e <a href="https://files.dre.pt/1s/2021/12/23601/0000500009.pdf" target="_blank">2021</a>;</li>
+                <li class="lead">TSU trabalhador: <a href="http://www.seg-social.pt/documents/10152/16175054/Taxas_Contributivas_2019.pdf/5ea23f5f-e7c4-400f-958b-4ff12c41ca0e" target="_blank">taxas contributicas</a>;</li>
+                <li class="lead"><a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/Folhetos_informativos/Documents/IRS_folheto_2019.pdf" target="_blank">Folheto informativo</a> de IRS da Autoridade Tributária e Aduaneira.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <h2>Notícias sobre o flat tax</h2>
+              <ul>
+                <li class="lead"><a href="https://eco.sapo.pt/opiniao/mitos-e-falacias-sobre-o-irs-em-portugal-i/" target="_blank">Mitos e falácias sobre o IRS em Portugal (I)</a>;</li>
+                <li class="lead"><a href="https://eco.sapo.pt/opiniao/mitos-e-falacias-sobre-a-progressividade-fiscal-ii/" target="_blank">Mitos e falácias sobre a progressividade fiscal (II)</a>;</li>
+                <li class="lead"><a href="https://eco.sapo.pt/opiniao/em-defesa-do-imposto-proporcional-flat-tax/" target="_blank">Em defesa do imposto proporcional (“flat tax”)</a>;</li>
+                <li class="lead"><a href="https://sicnoticias.pt/economia/2020-09-21-A-Flat-Tax-em-debate" target="_blank">A “Flat Tax” em debate</a>;</li>
+                <li class="lead"><a href="https://observador.pt/opiniao/fazer-de-portugal-o-porto-seguro-do-teletrabalho/" target="_blank">Fazer de Portugal o porto seguro do teletrabalho – Observador</a>.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="mb-3 mt-3 text-muted text-center text-small">
+      <p class="mb-1">© 2020-2022 Produzido para o partido Iniciativa Liberal</p>
+      <!--
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="irs.js"></script>
+
+  </body>
+
+</html>
